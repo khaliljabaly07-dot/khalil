@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B0D10">
+  <meta name="description" content="NEXORA is a digital agency creating modern websites, thoughtful digital experiences, and distinctive visual identities.">
+  <title>NEXORA — Digital Agency</title>
+  <style>
+    :root {
+      --bg: #0B0D10;
+      --panel: #141820;
+      --text: #F5F3EE;
+      --muted: #A5ACB8;
+      --gold: #D6B779;
+      --gold-light: #F0D9A2;
+      --border: #292E38;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--gold); font-size: .76rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+    .section { padding: 105px 0; }
+    .section-heading { max-width: 680px; margin-bottom: 42px; }
+    .section-heading h2 {
+      margin: 14px 0; font-size: clamp(2.1rem, 5vw, 3.7rem);
+      line-height: 1.08; letter-spacing: -.055em;
+    }
+    .section-heading p { color: var(--muted); margin: 0; max-width: 590px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 13, 16, .84); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 1.45rem; font-weight: 800; letter-spacing: .19em; }
+    .brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #d2d4d8; font-size: .9rem; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta, .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 0 20px; border-radius: 5px;
+      background: var(--gold); color: #14110b; font-weight: 800; border: 1px solid var(--gold);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .nav-cta:hover, .button:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .button.secondary { background: transparent; color: var(--text); border-color: var(--border); }
+    .button.secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+    .menu-toggle { display: none; background: none; border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 5px; font-size: 1.2rem; }
+
+    .hero { position: relative; overflow: hidden; padding: 112px 0 96px; }
+    .hero::before {
+      content: ""; position: absolute; width: 600px; height: 600px; right: -180px; top: -220px;
+      background: radial-gradient(circle, rgba(214,183,121,.14), transparent 68%); pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 55px; align-items: center; position: relative; }
+    .hero h1 { margin: 20px 0; max-width: 720px; font-size: clamp(3.2rem, 7.5vw, 6.7rem); line-height: .98; letter-spacing: -.075em; }
+    .hero h1 span { color: var(--gold); }
+    .hero-copy { max-width: 580px; color: var(--muted); font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero-note { display: flex; align-items: center; gap: 12px; margin-top: 34px; color: var(--muted); font-size: .83rem; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 14px rgba(214,183,121,.7); }
+    .visual {
+      position: relative; min-height: 450px; border: 1px solid #35302a; border-radius: 18px; overflow: hidden;
+      background:
+        radial-gradient(ellipse at 65% 28%, rgba(214,183,121,.22), transparent 32%),
+        linear-gradient(145deg, #1d2026 0%, #111318 55%, #201b13 100%);
+      display: grid; place-items: center;
+    }
+    .visual::before, .visual::after { content: ""; position: absolute; border: 1px solid rgba(214,183,121,.22); border-radius: 50%; width: 310px; height: 310px; }
+    .visual::after { width: 410px; height: 410px; }
+    .visual-mark { position: relative; z-index: 1; font-family: Georgia, serif; font-size: clamp(8rem, 19vw, 15rem); line-height: 1; color: var(--gold); text-shadow: 0 12px 40px rgba(0,0,0,.45); letter-spacing: -.12em; }
+    .visual-caption { position: absolute; bottom: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; gap: 12px; color: #c5bda9; font-size: .7rem; letter-spacing: .17em; text-transform: uppercase; }
+
+    .trust-row { border-block: 1px solid var(--border); padding: 24px 0; }
+    .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; color: #777f8d; font-size: .76rem; letter-spacing: .15em; text-transform: uppercase; }
+    .trust-inner strong { color: var(--gold); font-weight: 600; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service-card { padding: 30px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; transition: transform .25s ease, border-color .25s ease; }
+    .service-card:hover { transform: translateY(-5px); border-color: rgba(214,183,121,.65); }
+    .card-number { color: var(--gold); font-size: .78rem; letter-spacing: .15em; }
+    .service-icon { width: 48px; height: 48px; display: grid; place-items: center; margin: 24px 0 18px; border: 1px solid #49402d; border-radius: 8px; color: var(--gold); font-size: 1.35rem; }
+    .service-card h3 { margin: 0 0 10px; font-size: 1.3rem; }
+    .service-card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+    .about-panel { min-height: 360px; border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(140deg, #1c2027, #101216); display: grid; place-items: center; overflow: hidden; position: relative; }
+    .about-panel::before { content: ""; position: absolute; width: 250px; height: 250px; border: 1px solid rgba(214,183,121,.35); transform: rotate(45deg); }
+    .about-panel::after { content: ""; position: absolute; width: 175px; height: 175px; border: 1px solid rgba(214,183,121,.2); transform: rotate(45deg); }
+    .about-monogram { z-index: 1; font: italic 9rem/1 Georgia, serif; color: var(--gold); }
+    .about-copy h2 { margin: 14px 0 20px; font-size: clamp(2.1rem, 4vw, 3.5rem); line-height: 1.08; letter-spacing: -.055em; }
+    .about-copy p { color: var(--muted); }
+    .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 28px; }
+    .value { border-left: 2px solid var(--gold); padding-left: 14px; }
+    .value strong { display: block; margin-bottom: 4px; }
+    .value span { color: var(--muted); font-size: .88rem; }
+
+    .portfolio { background: #0e1014; border-block: 1px solid rgba(255,255,255,.04); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); }
+    .project-art { min-height: 235px; padding: 22px; display: flex; align-items: flex-end; position: relative; overflow: hidden; }
+    .project-art::before { content: ""; position: absolute; width: 220px; height: 220px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; top: -75px; right: -55px; }
+    .project-art::after { content: ""; position: absolute; width: 150px; height: 150px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; top: -40px; right: -20px; }
+    .art-one { background: linear-gradient(135deg, #8d7651, #24211c 72%); }
+    .art-two { background: linear-gradient(135deg, #263e52, #111923 72%); }
+    .art-three { background: linear-gradient(135deg, #5c3948, #1b171d 72%); }
+    .art-four { background: linear-gradient(135deg, #435448, #151b17 72%); }
+    .art-five { background: linear-gradient(135deg, #655a87, #1b1926 72%); }
+    .art-six { background: linear-gradient(135deg, #a06c43, #201711 72%); }
+    .art-label { position: relative; z-index: 1; font: 2.1rem/1 Georgia, serif; letter-spacing: -.04em; }
+    .project-info { padding: 20px; }
+    .project-type { color: var(--gold); text-transform: uppercase; font-size: .7rem; letter-spacing: .16em; }
+    .project-info h3 { margin: 8px 0 5px; }
+    .project-info p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .demo-label { display: inline-block; margin-top: 12px; padding: 4px 8px; border: 1px solid #51462f; border-radius: 4px; color: var(--gold-light); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+    .process-item { border-top: 1px solid var(--border); padding-top: 22px; counter-increment: step; }
+    .process-item::before { content: "0" counter(step); color: var(--gold); font-size: .8rem; letter-spacing: .12em; }
+    .process-item h3 { margin: 14px 0 8px; }
+    .process-item p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    .contact-box { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: clamp(28px, 6vw, 58px); border: 1px solid #4a402c; border-radius: 14px; background: radial-gradient(ellipse at top right, rgba(214,183,121,.12), transparent 55%), var(--panel); }
+    .contact-box h2 { margin: 12px 0; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.08; letter-spacing: -.055em; }
+    .contact-box p { color: var(--muted); max-width: 600px; margin-bottom: 0; }
+    .contact-actions { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+    .contact-email { color: var(--gold-light); font-size: .92rem; overflow-wrap: anywhere; text-align: center; }
+
+    footer { padding: 30px 0; border-top: 1px solid var(--border); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; color: var(--muted); font-size: .85rem; }
+    .footer-brand { color: var(--text); font-weight: 800; letter-spacing: .18em; }
+    .footer-brand span { color: var(--gold); }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--gold-light); }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 900px) {
+      .nav-links { gap: 16px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .visual { min-height: 360px; }
+      .about-grid { grid-template-columns: 1fr; gap: 35px; }
+      .about-panel { min-height: 280px; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .section { padding: 76px 0; }
+      .nav { min-height: 70px; }
+      .menu-toggle { display: inline-block; }
+      .nav-cta { display: none; }
+      .nav-links {
+        display: none; position: absolute; top: 70px; left: 14px; right: 14px; padding: 18px;
+        flex-direction: column; align-items: stretch; gap: 0; border: 1px solid var(--border);
+        border-radius: 10px; background: #111419;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 6px; }
+      .hero { padding: 75px 0 65px; }
+      .hero h1 { font-size: clamp(3rem, 15vw, 5rem); }
+      .visual { min-height: 300px; }
+      .visual::before { width: 220px; height: 220px; }
+      .visual::after { width: 290px; height: 290px; }
+      .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
+      .project-art { min-height: 210px; }
+      .values { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      .contact-box { grid-template-columns: 1fr; }
+      .contact-actions { align-items: stretch; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="NEXORA home">NEX<span>O</span>RA</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#work">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="nav-cta" href="#contact">Let’s Talk <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Digital Agency</span>
+          <h1>We build digital experiences <span>that matter.</span></h1>
+          <p class="hero-copy">NEXORA creates modern websites, thoughtful digital experiences, and distinctive visual identities that help brands move forward.</p>
+          <div class="hero-actions">
+            <a class="button" href="#work">Explore Our Work <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="#services">Discover Services</a>
+          </div>
+          <div class="hero-note"><span class="status-dot"></span> Strategy. Design. Development.</div>
+        </div>
+        <div class="visual" aria-label="Abstract NEXORA brand artwork" role="img">
+          <div class="visual-mark">N<span style="font-style:italic">x</span></div>
+          <div class="visual-caption"><span>Independent Digital Studio</span><span>Est. NEXORA</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-row">
+      <div class="container trust-inner">
+        <span>Made for ambitious ideas</span><strong>Design with purpose</strong><span>Built for the next step</span>
+      </div>
+    </div>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">What We Do</span>
+          <h2>Digital craft, built around your goals.</h2>
+          <p>From the first idea to the final detail, we bring design and technology together to create a clear, memorable online presence.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <span class="card-number">01 / DESIGN</span><div class="service-icon" aria-hidden="true">✳</div>
+            <h3>Web Design</h3><p>Modern, user-focused websites with thoughtful layouts, clear messaging, and a distinctive visual style.</p>
+          </article>
+          <article class="service-card reveal">
+            <span class="card-number">02 / BUILD</span><div class="service-icon" aria-hidden="true">⌘</div>
+            <h3>Web Development</h3><p>Responsive, accessible web experiences designed to work smoothly across phones, tablets, and desktops.</p>
+          </article>
+          <article class="service-card reveal">
+            <span class="card-number">03 / IDENTITY</span><div class="service-icon" aria-hidden="true">◈</div>
+            <h3>Graphic Design</h3><p>Visual identities and digital graphics that help your brand feel consistent, recognizable, and considered.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-panel reveal" aria-hidden="true"><div class="about-monogram">N.</div></div>
+        <div class="about-copy reveal">
+          <span class="eyebrow">About NEXORA</span>
+          <h2>Good design makes the complex feel simple.</h2>
+          <p>We believe a strong digital presence starts with clarity. NEXORA brings strategy, design, and development into one considered process—helping ideas become polished digital experiences.</p>
+          <p>Our approach is collaborative, detail-driven, and focused on making every part of your online presence feel intentional.</p>
+          <div class="values">
+            <div class="value"><strong>Thoughtful by design</strong><span>Every detail has a purpose.</span></div>
+            <div class="value"><strong>Built for people</strong><span>Clear, useful, easy to navigate.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section portfolio" id="work">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Selected Concepts</span>
+          <h2>A glimpse of what we can create.</h2>
+          <p>These are fictional concept projects created to demonstrate NEXORA’s design direction, not client work.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="project-card reveal">
+            <div class="project-art art-one"><span class="art-label">MONO<br>FORM</span></div>
+            <div class="project-info"><span class="project-type">Branding · Concept</span><h3>Monoform Studio</h3><p>A restrained identity concept for a contemporary design studio.</p><span class="demo-label">Fictional concept</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-art art-two"><span class="art-label">NORTH<br>ATELIER</span></div>
+            <div class="project-info"><span class="project-type">Web Design · Concept</span><h3>North Atelier</h3><p>A calm, editorial web concept for a boutique interior brand.</p><span class="demo-label">Fictional concept</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-art art-three"><span class="art-label">VELORA</span></div>
+            <div class="project-info"><span class="project-type">E-commerce · Concept</span><h3>Velora Beauty</h3><p>A premium digital storefront concept for a beauty label.</p><span class="demo-label">Fictional concept</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-art art-four"><span class="art-label">FIELD<br>NOTES</span></div>
+            <div class="project-info"><span class="project-type">Editorial · Concept</span><h3>Field Notes</h3><p>A clean editorial direction for a sustainability publication.</p><span class="demo-label">Fictional concept</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-art art-five"><span class="art-label">ORBITAL</span></div>
+            <div class="project-info"><span class="project-type">Landing Page · Concept</span><h3>Orbital Finance</h3><p>A confident landing page direction for a fictional fintech brand.</p><span class="demo-label">Fictional concept</span></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-art art-six"><span class="art-label">CASA<br>SOLE</span></div>
+            <div class="project-info"><span class="project-type">Visual Identity · Concept</span><h3>Casa Sole</h3><p>A warm identity concept for a fictional lifestyle label.</p><span class="demo-label">Fictional concept</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">How We Work</span>
+          <h2>Clear steps. Considered outcomes.</h2>
+        </div>
+        <div class="process-grid">
+          <article class="process-item reveal"><h3>Discover</h3><p>We learn about your goals, audience, and what success should look like.</p></article>
+          <article class="process-item reveal"><h3>Define</h3><p>We shape the direction, structure, and priorities before building.</p></article>
+          <article class="process-item reveal"><h3>Create</h3><p>We design and develop a responsive experience with care and purpose.</p></article>
+          <article class="process-item reveal"><h3>Refine</h3><p>We review the details and prepare the experience for launch.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box reveal">
+          <div>
+            <span class="eyebrow">Have a project in mind?</span>
+            <h2>Let’s make something meaningful.</h2>
+            <p>Tell us a little about your idea. We’d love to hear what you’re building and explore how NEXORA can help.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="button" href="mailto:n38244247@gmail.com?subject=NEXORA%20Project%20Inquiry">Start a Conversation <span aria-hidden="true">↗</span></a>
+            <a class="contact-email" href="mailto:n38244247@gmail.com">n38244247@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="footer-brand" href="#home">NEX<span>O</span>RA</a>
+      <span>© <span id="year"></span> NEXORA. All rights reserved.</span>
+      <div class="footer-links"><a href="#services">Services</a><a href="#work">Portfolio</a><a href="#contact">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+  </script>
+</body>
+</html>
